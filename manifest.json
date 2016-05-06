@@ -1,0 +1,32 @@
+{
+  "name": "Fwrdto.me",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "Send web pages to your inbox in just one click!",
+  "homepage_url": "https://fwrdto.me",
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png",
+    "256": "icons/icon256.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon256.png",
+    "default_title": "Send page to my inbox!"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "https://*/*",
+    "http://*/*"
+  ]
+}

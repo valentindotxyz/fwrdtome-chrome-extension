@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Fwrdto.me Settings</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/sweetalert.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="css/options.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="page-header">
+                    <h1>Fwrdto.me – Settings</h1>
+                    <p class="lead">
+                        Send web pages to your email inbox in just one click!
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+
+                        <div id="error_revoked" class="alert alert-danger error">
+                            <strong>Account revoked:</strong> Your account has been revoked! <a href="#"><i class="fa fa-refresh fa-fw" aria-hidden="true"></i> Reset it</a>
+                        </div>
+
+                        <div id="error_enter_email" class="alert alert-warning error">
+                            <strong>Action required:</strong><br />
+                            Please enter your email address below to start receiving links!
+                        </div>
+
+                        <div id="error_need_check" class="alert alert-warning error">
+                            <strong>Action required:</strong><br />
+                            You need to activate your email address before sending any links! &nbsp;<a href="#" id="checkValidationStatusBtn"><i class="fa fa-refresh fa-fw" aria-hidden="true"></i> Check validation status</a>
+                        </div>
+
+                        <div id="success" class="alert alert-success error">
+                            <strong>Email address confirmed, happy sending!</strong> You can close this tab now.
+                        </div>
+
+                        <form>
+                            <div class="form-group">
+                                <label for="email">Email address*</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email address">
+                            </div>
+                            <button id="registerBtn" type="button" class="btn btn-success">Register</button>
+                            <button id="resetBtn" type="button" class="btn btn-danger btn-sm">Reset</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <p class="text-muted">Made by <a href="https://valentin.xyz" target="_blank">Valentin Polo</a> in Lille, France. Feel free to <a href="mailto:fwrdtome@valentin.xyz">contact me</a>!</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/underscore.min.js" type="text/javascript"></script>
+    <script src="js/sweetalert.min.js" type="text/javascript"></script>
+    <script src="js/options.js" type="text/javascript"></script>
+
+</body>
+</html>
