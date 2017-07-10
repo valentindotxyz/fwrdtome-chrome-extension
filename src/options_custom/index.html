@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Fwrdto.me Settings</title>
+    <title>fwrdto.me</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/sweetalert.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
@@ -24,9 +24,9 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="page-header">
-                    <h1>Fwrdto.me – Settings</h1>
+                    <h1>fwrdto.me</h1>
                     <p class="lead">
-                        Send web pages to your email inbox in just one click!
+                        Send links to yourself inbox with just one click
                     </p>
                 </div>
 
@@ -39,7 +39,7 @@
 
                         <div id="error_enter_email" class="alert alert-warning error">
                             <strong>Action required:</strong><br />
-                            Please enter your email address below to start receiving links!
+                            Please enter your email address below to start sending links!
                         </div>
 
                         <div id="error_need_check" class="alert alert-warning error">
@@ -56,8 +56,36 @@
                                 <label for="email">Email address*</label>
                                 <input type="email" class="form-control" id="email" placeholder="Email address">
                             </div>
-                            <button id="registerBtn" type="button" class="btn btn-success">Register</button>
+                            <button id="registerBtn" type="button" class="btn btn-success">Save</button>
                             <button id="resetBtn" type="button" class="btn btn-danger btn-sm">Reset</button>
+                        </form>
+                    </div>
+                </div>
+
+                <br /><br /><br />
+
+                <div id="options" class="row hidden">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3>Options (saved automatically)</h3>
+                        <form class="form-horizontal" name="preferences">
+                            <fieldset>
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            <label for="checkboxPreviews">
+                                                <input type="checkbox" name="preview" id="checkboxPreviews" value="yes">
+                                                Add website previews to links
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label for="checkboxQueued">
+                                                <input type="checkbox" name="queued" id="checkboxQueued" value="yes">
+                                                Group links so I receive just one email per day
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>
@@ -70,7 +98,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <p class="text-muted">Made by <a href="https://valentin.xyz" target="_blank">Valentin Polo</a> in Lille, France. Feel free to <a href="mailto:fwrdtome@valentin.xyz">contact me</a>!</p>
+                    <p class="text-muted">Made by <a href="https://valentin.xyz" target="_blank">Valentin Polo</a> from Lille, France – <a href="https://vpfr.typeform.com/to/u1ABkW" target="_blank">Contact</a></p>
                 </div>
             </div>
         </div>

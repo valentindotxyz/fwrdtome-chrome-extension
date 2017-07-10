@@ -1,8 +1,8 @@
 {
-  "name": "Fwrdto.me",
-  "version": "1.0.1",
+  "name": "fwrdto.me",
+  "version": "2.0",
   "manifest_version": 2,
-  "description": "Send web pages to your inbox in just one click!",
+  "description": "Send links to yourself with just one click!",
   "homepage_url": "https://fwrdto.me",
   "icons": {
     "16": "icons/icon16.png",
@@ -24,6 +24,8 @@
     "default_title": "Send page to my inbox!"
   },
   "permissions": [
+    "tabs",
+    "contextMenus",
     "storage",
     "notifications",
     "https://*/*",

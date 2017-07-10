@@ -1,38 +1,48 @@
+var API_ENDPOINT = "https://fwrdto.me/api";
+
 var inputEmail = document.getElementById('email');
 var registerBtn = document.getElementById('registerBtn');
 var resetBtn = document.getElementById('resetBtn');
 var checkValidationStatusBtn = document.getElementById('checkValidationStatusBtn');
 
+var options = document.getElementById('options');
+var checkboxPreviews = document.getElementById('checkboxPreviews');
+var checkboxQueued = document.getElementById('checkboxQueued');
 
 registerBtn.addEventListener('click', function ()
 {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://robot.fwrdto.me/chrome/register');
+    xhr.open('POST', API_ENDPOINT + '/register');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function() {
         if (xhr.status === 200) {
             var apiKey = JSON.parse(xhr.response);
-            swal("Confirmation link sent!", "We just emailed you a confirmation link to check your email address! Thank you!", "success")
-            chrome.storage.sync.set({'apiKey': apiKey}, function() {
-                displayErrors();
-            });
+            swal("Confirmation link sent!", "We just emailed you a link to confirm your email.", "success")
+            chrome.storage.sync.set({
+                    apiKey: apiKey,
+                    settings: { preview: true, queued: false }
+                },
+                function() {
+                    displayErrors();
+                });
         }
     };
     xhr.send(JSON.stringify({
-        email: inputEmail.value
+        email: inputEmail.value,
+        source: "chrome"
     }));
 });
 
 resetBtn.addEventListener('click', function ()
 {
     swal({
-        title: "Are you sure?",
-        text: "You're about to reset your account!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, reset it!",
-        closeOnConfirm: false },
+            title: "Are you sure?",
+            text: "You're about to reset your account!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, reset it!",
+            closeOnConfirm: false },
         function() {
             chrome.storage.sync.clear();
             window.location.reload();
@@ -41,8 +51,11 @@ resetBtn.addEventListener('click', function ()
 
 checkValidationStatusBtn.addEventListener('click', function()
 {
-   updateApiKey();
+    updateApiKey();
 });
+
+checkboxPreviews.addEventListener('change', updateSetting);
+checkboxQueued.addEventListener('change', updateSetting);
 
 function displayErrors(error)
 {
@@ -57,11 +70,11 @@ function displayErrors(error)
 
     chrome.storage.sync.get('apiKey', function(res)
     {
-        if (res.apiKey.status === 'NEED_CHECK') {
+        if (res.apiKey.status === 'need_check') {
             document.getElementById('error_need_check').style.display = 'block';
-        } else if (res.apiKey.status === 'OK') {
+        } else if (res.apiKey.status === 'ok') {
             document.getElementById('success').style.display = 'block';
-        } else if (res.apiKey.status === 'REVOKED') {
+        } else if (res.apiKey.status === 'revoked') {
             document.getElementById('error_revoked').style.display = 'block';
         }
     });
@@ -77,19 +90,38 @@ function updateApiKey()
         }
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://robot.fwrdto.me/chrome/ping');
+        xhr.open('GET', API_ENDPOINT + '/check?api-key=' + res.apiKey.uuid);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = function() {
             if (xhr.status === 200) {
                 var apiKeyUpdated = JSON.parse(xhr.response);
-                chrome.storage.sync.set({'apiKey': apiKeyUpdated}, function() {
-                    displayErrors();
-                });
+                chrome.storage.sync.set({
+                        apiKey: apiKeyUpdated
+                    },
+                    function() {
+                        displayErrors();
+                        populateFields();
+                    });
             }
         };
-        xhr.send(JSON.stringify({
-            apiKey: res.apiKey.uuid
-        }));
+        xhr.send();
+    });
+}
+
+function updateSetting(event)
+{
+    chrome.storage.sync.get('settings', function(res)
+    {
+        if (typeof res.settings === 'undefined')
+            return;
+
+        var updatedSettings = res;
+
+        console.log('[VP]', 'updated', updatedSettings);
+
+        updatedSettings["settings"][event.target.name] = event.target.checked;
+
+        chrome.storage.sync.set(updatedSettings);
     });
 }
 
@@ -100,7 +132,17 @@ function populateFields()
         if (typeof res.apiKey === 'undefined')
             return;
 
-        document.getElementById('email').value = res.apiKey.email;
+        inputEmail.value = res.apiKey.email;
+    });
+
+    chrome.storage.sync.get('settings', function(res)
+    {
+        if (typeof res.settings === 'undefined')
+            return;
+
+        options.classList.remove('hidden');
+        checkboxPreviews.checked = res.settings.preview;
+        checkboxQueued.checked = res.settings.queued;
     });
 }
 
