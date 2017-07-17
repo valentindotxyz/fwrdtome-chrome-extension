@@ -27,7 +27,7 @@ function sendLink(title, url)
             return;
         }
 
-        var params = "?preview=" + (res.settings.preview ? "yes" : "no") + "&queued=" + (res.settings.queued ? "yes" : "no") + "&api-key=" + res.apiKey.uuid + "&link=" + url;
+        var params = "?preview=" + (res.settings.preview ? "yes" : "no") + "&queued=" + (res.settings.queued ? "yes" : "no") + "&api-key=" + res.apiKey.uuid + "&link=" + url + "&title=" + title;
 
         var xhr = new XMLHttpRequest();
         xhr.open('GET', API_ENDPOINT + '/send' + params);
